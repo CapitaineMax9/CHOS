@@ -1,0 +1,12 @@
+[Unit]
+Description=Autotest de CHOS (intégration continue uniquement)
+# Ne fait rien au démarrage normal : seulement avec « chos.selftest ».
+ConditionKernelCommandLine=chos.selftest
+After=systemd-user-sessions.service
+
+[Service]
+Type=simple
+ExecStart=/usr/lib/chos/selftest
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,34 @@
+#!/bin/sh
+# Programmes lancés à l'ouverture de la session CHOS.
+
+RUNDIR="${XDG_RUNTIME_DIR:-/tmp}"
+
+# Fond d'écran uni (visible seulement quand aucune fenêtre n'est ouverte).
+xsetroot -solid '#202124'
+
+# Barre des tâches. Sur la clé USB (mode « live »), on ajoute le bouton
+# « Installer CHOS » ; il disparaît une fois CHOS installé sur le disque.
+TINT2RC=/etc/chos/tint2rc
+if [ -d /run/live/medium ] && command -v calamares >/dev/null 2>&1; then
+	TINT2RC="$RUNDIR/chos-tint2rc"
+	sed 's|^#LIVE# ||' /etc/chos/tint2rc > "$TINT2RC"
+fi
+tint2 -c "$TINT2RC" &
+
+# Icônes de la barre : Wi-Fi, son, Bluetooth (si le PC en a).
+nm-applet &
+pasystray &
+if [ -n "$(ls -A /sys/class/bluetooth 2>/dev/null)" ]; then
+	blueman-applet &
+fi
+
+# Google Chrome (relancé automatiquement si on ferme toutes les fenêtres).
+rm -f "$RUNDIR/chos-stop"
+/usr/lib/chos/chrome-loop &
+
+# Message d'accueil sur la clé USB.
+if [ -d /run/live/medium ]; then
+	(sleep 8 && notify-send -i google-chrome "Bienvenue dans CHOS" \
+		"Connecte-toi à Chrome avec ton compte Google pour retrouver tes favoris, extensions et mots de passe.
+Pour installer CHOS sur le disque, clique sur l'icône d'installation dans la barre en bas.") &
+fi

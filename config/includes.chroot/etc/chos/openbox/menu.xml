@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Menu du clic droit sur le fond d'écran de CHOS -->
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+  <menu id="chos-menu" label="CHOS">
+    <item label="Nouvelle fenêtre Chrome">
+      <action name="Execute"><command>google-chrome-stable --new-window</command></action>
+    </item>
+    <item label="Réglages Wi-Fi">
+      <action name="Execute"><command>nm-connection-editor</command></action>
+    </item>
+    <separator/>
+    <item label="Éteindre / Redémarrer">
+      <action name="Execute"><command>chos-power</command></action>
+    </item>
+  </menu>
+</openbox_menu>

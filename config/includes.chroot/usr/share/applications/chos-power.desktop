@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Éteindre / Redémarrer
+Comment=Éteindre, redémarrer ou mettre en veille le PC
+Exec=chos-power
+Icon=system-shutdown
+Terminal=false
+Categories=System;

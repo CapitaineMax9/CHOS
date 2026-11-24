@@ -1,0 +1,9 @@
+#!/bin/sh
+# Appelé automatiquement par « lb clean ».
+set -e
+
+lb clean noauto "${@}"
+# Fichiers générés par « lb config » (ils ne font pas partie du projet)
+rm -f config/binary config/bootstrap config/chroot config/common config/source
+rm -f config/package-lists/live.list.chroot
+rm -f build.log

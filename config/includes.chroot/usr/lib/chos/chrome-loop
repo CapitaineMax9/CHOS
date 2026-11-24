@@ -1,0 +1,11 @@
+#!/bin/sh
+# Garde Google Chrome ouvert en permanence : s'il est fermé, il est relancé.
+
+RUNDIR="${XDG_RUNTIME_DIR:-/tmp}"
+
+while :; do
+	google-chrome-stable --start-maximized --password-store=basic
+	# Arrêt demandé (extinction / redémarrage) : on ne relance pas Chrome.
+	[ -e "$RUNDIR/chos-stop" ] && exit 0
+	sleep 1
+done

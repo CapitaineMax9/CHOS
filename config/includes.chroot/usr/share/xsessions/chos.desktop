@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=CHOS
+Comment=Google Chrome, tout simplement
+Exec=/usr/bin/chos-session

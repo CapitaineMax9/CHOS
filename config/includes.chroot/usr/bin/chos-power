@@ -1,0 +1,33 @@
+#!/bin/sh
+# Menu « Éteindre / Redémarrer / Veille » de CHOS.
+
+RUNDIR="${XDG_RUNTIME_DIR:-/tmp}"
+
+CHOIX=$(zenity --list --title="CHOS" --text="Que veux-tu faire ?" \
+	--column="Action" "Éteindre" "Redémarrer" "Mettre en veille" \
+	--width=300 --height=260 2>/dev/null) || exit 0
+
+# Ferme Chrome proprement (pour qu'il ne signale pas un « plantage »).
+fermer_chrome() {
+	touch "$RUNDIR/chos-stop"
+	pkill -TERM -x chrome
+	i=0
+	while pgrep -x chrome >/dev/null && [ "$i" -lt 10 ]; do
+		sleep 0.5
+		i=$((i + 1))
+	done
+}
+
+case "$CHOIX" in
+	"Éteindre")
+		fermer_chrome
+		systemctl poweroff
+		;;
+	"Redémarrer")
+		fermer_chrome
+		systemctl reboot
+		;;
+	"Mettre en veille")
+		systemctl suspend
+		;;
+esac

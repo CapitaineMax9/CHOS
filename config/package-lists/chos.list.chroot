@@ -1,0 +1,73 @@
+# Paquets installés dans CHOS (Debian 13 « trixie »).
+# Les pilotes / firmwares (Wi-Fi, carte graphique, son...) sont ajoutés
+# automatiquement par live-build grâce à --firmware-chroot.
+
+# --- Système de base pour le mode « live » (clé USB) ---
+user-setup
+sudo
+locales
+tzdata
+keyboard-configuration
+console-setup
+iproute2
+curl
+ca-certificates
+
+# --- Microcode des processeurs (corrige des bugs Intel / AMD) ---
+intel-microcode
+amd64-microcode
+
+# --- Affichage ---
+xserver-xorg
+x11-xserver-utils
+xauth
+lightdm
+lightdm-gtk-greeter
+dbus-user-session
+mesa-va-drivers
+mesa-vulkan-drivers
+va-driver-all
+
+# --- Interface minimale : gestionnaire de fenêtres + barre ---
+openbox
+tint2
+dunst
+libnotify-bin
+zenity
+xterm
+adwaita-icon-theme
+fonts-dejavu-core
+fonts-liberation
+fonts-noto-color-emoji
+
+# --- Réseau (Wi-Fi) ---
+network-manager
+network-manager-gnome
+wpasupplicant
+
+# --- Son ---
+pipewire-audio
+libspa-0.2-bluetooth
+pasystray
+
+# --- Bluetooth ---
+bluez
+blueman
+
+# --- PC portable : luminosité, mémoire compressée (moins de lag) ---
+brightnessctl
+systemd-zram-generator
+
+# --- Mises à jour automatiques (sécurité + Chrome) ---
+unattended-upgrades
+
+# --- Installation sur le disque (à côté de Windows) ---
+calamares
+calamares-settings-debian
+grub-efi-amd64
+grub-efi-amd64-signed
+shim-signed
+efibootmgr
+os-prober
+ntfs-3g
+dosfstools

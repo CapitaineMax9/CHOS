@@ -1,0 +1,19 @@
+#!/bin/sh
+# Configuration de live-build pour CHOS.
+# Ce fichier est appelé automatiquement par « lb config ».
+set -e
+
+lb config noauto \
+	--distribution trixie \
+	--archive-areas "main contrib non-free non-free-firmware" \
+	--apt-recommends false \
+	--firmware-chroot true \
+	--firmware-binary true \
+	--debian-installer none \
+	--binary-images iso-hybrid \
+	--image-name chos \
+	--iso-application "CHOS" \
+	--iso-publisher "CHOS" \
+	--iso-volume "CHOS" \
+	--bootappend-live "boot=live components quiet persistence username=chos user-fullname=CHOS hostname=chos locales=fr_FR.UTF-8 keyboard-layouts=fr timezone=Europe/Paris" \
+	"${@}"

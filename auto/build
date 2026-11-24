@@ -1,0 +1,5 @@
+#!/bin/sh
+# Appelé automatiquement par « lb build ».
+set -e
+
+lb build noauto "${@}"

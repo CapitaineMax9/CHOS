@@ -1,0 +1,24 @@
+# Fichiers générés par live-build
+.build/
+cache/
+chroot/
+binary/
+local/
+chroot.files
+chroot.packages.*
+binary.modified_timestamps
+*.contents
+*.files
+*.packages
+*.hybrid.iso
+build.log
+config/binary
+config/bootstrap
+config/chroot
+config/common
+config/source
+config/package-lists/live.list.chroot
+
+# Résultats
+out/
+test-results/

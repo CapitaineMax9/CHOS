@@ -1,0 +1,3 @@
+#!/bin/sh
+# Session CHOS : le gestionnaire de fenêtres Openbox (très léger) + Google Chrome.
+exec openbox --config-file /etc/chos/openbox/rc.xml --startup /usr/lib/chos/autostart

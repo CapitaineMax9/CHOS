@@ -1,0 +1,38 @@
+#!/bin/sh
+# Script exécuté à l'intérieur du système CHOS pendant sa fabrication.
+set -e
+
+echo "[CHOS] Installation de Google Chrome"
+# Google Chrome (et non Chromium) est nécessaire pour la synchronisation
+# avec le compte Google : favoris, extensions, mots de passe, historique.
+curl -fsSL --retry 5 -o /tmp/google-chrome.deb \
+	https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+apt-get install -y /tmp/google-chrome.deb
+rm -f /tmp/google-chrome.deb
+test -x /usr/bin/google-chrome-stable
+
+# Le paquet Chrome ajoute lui-même le dépôt de Google pour se mettre à jour.
+echo "[CHOS] Dépôts APT supplémentaires :"
+ls -l /etc/apt/sources.list.d/ || true
+
+echo "[CHOS] Réglages de la session"
+# CHOS doit être la seule session proposée.
+rm -f /usr/share/xsessions/openbox.desktop /usr/share/xsessions/openbox-kde.desktop
+
+chmod 0755 /usr/bin/chos-session /usr/bin/chos-power /usr/bin/chos-install \
+	/usr/lib/chos/autostart /usr/lib/chos/chrome-loop /usr/lib/chos/selftest
+
+# Autotest de l'intégration continue (ne s'exécute qu'avec « chos.selftest »).
+systemctl enable chos-selftest.service
+
+# Mémoire compressée (zram) : utile sur les PC avec peu de RAM.
+mkdir -p /etc/systemd
+if [ ! -e /etc/systemd/zram-generator.conf ]; then
+	cat > /etc/systemd/zram-generator.conf <<'EOF'
+[zram0]
+zram-size = min(ram / 2, 8192)
+compression-algorithm = zstd
+EOF
+fi
+
+echo "[CHOS] Terminé"

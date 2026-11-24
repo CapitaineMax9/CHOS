@@ -1,0 +1,13 @@
+// CHOS : mises à jour automatiques chaque jour, sans rien demander.
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "1";
+APT::Periodic::AutocleanInterval "7";
+
+// En plus des correctifs de sécurité Debian (déjà prévus par défaut) :
+Unattended-Upgrade::Origins-Pattern {
+        // mises à jour de Debian 13
+        "origin=Debian,codename=${distro_codename},label=Debian";
+        "origin=Debian,codename=${distro_codename}-updates";
+        // Google Chrome
+        "site=dl.google.com";
+};

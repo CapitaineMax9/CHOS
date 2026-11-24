@@ -1,0 +1,4 @@
+#!/bin/sh
+# Lance l'installateur (Calamares) pour installer CHOS sur le disque du PC.
+# Sur la clé USB, l'utilisateur « chos » peut utiliser sudo sans mot de passe.
+exec sudo -E calamares "$@"

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Installer CHOS
+Comment=Installer CHOS sur le disque du PC (à côté de Windows possible)
+Exec=chos-install
+Icon=calamares
+Terminal=false
+Categories=System;

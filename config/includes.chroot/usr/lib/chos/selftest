@@ -1,0 +1,66 @@
+#!/bin/sh
+# Autotest de CHOS, utilisé par GitHub Actions dans une machine virtuelle QEMU.
+# Il ne s'exécute que si le noyau a été démarré avec l'option « chos.selftest ».
+# Les résultats sont écrits sur le port série (ttyS0), lu par tests/qemu-test.sh.
+
+OUT=/dev/ttyS0
+log() { echo "CHOS-SELFTEST: $*" > "$OUT"; }
+
+log "START"
+
+# 1. Attendre que la session graphique et Chrome soient lancés (10 min max).
+i=0
+while [ "$i" -lt 600 ]; do
+	if pgrep -x chrome >/dev/null && pgrep -x openbox >/dev/null && pgrep -x tint2 >/dev/null; then
+		break
+	fi
+	sleep 5
+	i=$((i + 5))
+done
+sleep 10
+
+{
+	echo "----- processus -----"
+	ps -eo user:12,comm | sort -u
+	echo "----- services en echec -----"
+	systemctl --failed --no-pager
+	echo "----- depots APT supplementaires -----"
+	ls -l /etc/apt/sources.list.d/
+	echo "----- clavier / langue -----"
+	cat /etc/default/keyboard
+	grep -v '^#' /etc/default/locale
+	echo "----- memoire -----"
+	free -m
+	swapon --show
+} > "$OUT" 2>&1
+
+for p in lightdm openbox tint2 nm-applet pasystray chrome; do
+	if pgrep -x "$p" >/dev/null; then
+		log "processus $p: present"
+	else
+		log "processus $p: ABSENT"
+	fi
+done
+
+if pgrep -x chrome >/dev/null && pgrep -x openbox >/dev/null && pgrep -x tint2 >/dev/null; then
+	log "CHROME-OK"
+else
+	log "CHROME-FAIL"
+	journalctl -b --no-pager | tail -n 150 > "$OUT" 2>&1
+fi
+
+# 2. Laisser le temps de faire une capture d'écran, puis tester l'installateur.
+sleep 30
+UHOME=$(getent passwd chos | cut -d: -f6)
+DISPLAY=:0 XAUTHORITY="$UHOME/.Xauthority" calamares -d > /tmp/calamares.log 2>&1 &
+CPID=$!
+sleep 45
+if kill -0 "$CPID" 2>/dev/null; then
+	log "CALAMARES-OK"
+else
+	log "CALAMARES-FAIL"
+	tail -n 80 /tmp/calamares.log > "$OUT" 2>&1
+fi
+sleep 30
+kill "$CPID" 2>/dev/null
+log "DONE"
