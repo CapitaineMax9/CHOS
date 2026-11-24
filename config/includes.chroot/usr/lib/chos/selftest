@@ -49,6 +49,22 @@ else
 	journalctl -b --no-pager | tail -n 150 > "$OUT" 2>&1
 fi
 
+# Outils indispensables à l'installateur (Calamares).
+for c in unsquashfs rsync grub-install os-prober update-grub; do
+	if command -v "$c" >/dev/null 2>&1; then
+		log "outil $c: present"
+	else
+		log "outil $c: ABSENT"
+		log "INSTALLER-TOOLS-FAIL"
+	fi
+done
+if ls /var/cache/cracklib/cracklib_dict.* >/dev/null 2>&1; then
+	log "dictionnaire mots de passe: present"
+else
+	log "dictionnaire mots de passe: ABSENT"
+	log "INSTALLER-TOOLS-FAIL"
+fi
+
 # 2. Laisser le temps de faire une capture d'écran, puis tester l'installateur.
 sleep 30
 UHOME=$(getent passwd chos | cut -d: -f6)

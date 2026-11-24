@@ -79,6 +79,7 @@ echo "========================================================="
 
 grep -q "CHOS-SELFTEST: CHROME-OK" "$SERIAL" || STATUS=1
 grep -q "CHOS-SELFTEST: CALAMARES-OK" "$SERIAL" || STATUS=1
+grep -q "CHOS-SELFTEST: INSTALLER-TOOLS-FAIL" "$SERIAL" && STATUS=1
 
 if [ "$STATUS" -eq 0 ]; then
 	echo "[test] RÉUSSI"
