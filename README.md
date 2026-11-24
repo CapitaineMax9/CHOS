@@ -166,7 +166,7 @@ Après installation, au démarrage du PC, un menu te laissera choisir **CHOS** (
 
 ### Au démarrage suivant
 
-Un menu s'affiche pendant 5 secondes :
+Un menu s'affiche pendant 10 secondes (choisis avec les flèches ↑ ↓ puis Entrée) :
 - **Debian GNU/Linux** = CHOS (choisi par défaut) ;
 - **Windows Boot Manager** = Windows.
 
