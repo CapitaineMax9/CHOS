@@ -71,3 +71,6 @@ efibootmgr
 os-prober
 ntfs-3g
 dosfstools
+# Dictionnaire pour vérifier les mots de passe (sinon l'installateur
+# refuse tous les mots de passe : « error loading dictionary »)
+cracklib-runtime
