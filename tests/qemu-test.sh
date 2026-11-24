@@ -39,7 +39,7 @@ qemu-system-x86_64 "${ACCEL[@]}" -m 4096 -smp 2 \
 	-monitor "unix:$WORK/monitor.sock,server,nowait" \
 	-nic user,model=virtio-net-pci &
 QEMU_PID=$!
-trap 'kill "$QEMU_PID" 2>/dev/null || true; rm -rf "$WORK"' EXIT
+trap 'kill "$QEMU_PID" 2>/dev/null || true; chmod -R u+w "$WORK" 2>/dev/null; rm -rf "$WORK" || true' EXIT
 
 wait_for() { # motif délai_en_secondes
 	local t=0 max=$(($2 * FACTOR))
