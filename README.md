@@ -5,7 +5,7 @@ CHOS est un système d'exploitation **très léger** qui ne fait qu'une chose : 
 ne fait que naviguer sur Internet.
 
 - Base : Debian 13 (Linux), stable et gratuite.
-- Interface : Google Chrome + une petite barre en bas (Wi-Fi, son, batterie, heure, bouton Éteindre).
+- Interface : Google Chrome en plein écran + une petite barre qui apparaît quand on amène la souris tout en bas (Wi-Fi, son, batterie, heure, bouton Éteindre).
 - **Tes favoris, extensions, mots de passe et historique** reviennent en te connectant à Chrome avec ton compte Google.
 - **Les raccourcis clavier de Chrome sont identiques** (Ctrl+T, Ctrl+W, Ctrl+Maj+T…).
 - Clavier français (AZERTY), langue française, heure de Paris.
