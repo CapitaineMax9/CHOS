@@ -203,7 +203,7 @@ Raccourcis propres à CHOS (choisis pour ressembler à Windows) :
 | Touche Windows + D | Afficher le bureau |
 | Touche Windows + E | Nouvelle fenêtre Chrome |
 | Ctrl+Alt+Suppr | Menu Éteindre / Redémarrer / Veille |
-| Ctrl+Alt+T | Terminal (utilisateurs avancés) |
+| Ctrl+Alt+T | Terminal (utilisateurs avancés) — Ctrl+Maj+C / Ctrl+Maj+V pour copier / coller |
 | Touches volume / luminosité du portable | Fonctionnent normalement |
 
 Autres astuces :

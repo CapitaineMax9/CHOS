@@ -1,0 +1,10 @@
+! CHOS : terminal (xterm) plus lisible, et copier / coller comme ailleurs :
+! Ctrl+Maj+C pour copier, Ctrl+Maj+V pour coller.
+XTerm*faceName: DejaVu Sans Mono
+XTerm*faceSize: 11
+XTerm*background: #202124
+XTerm*foreground: #e8eaed
+XTerm*selectToClipboard: true
+XTerm*VT100.translations: #override \n\
+    Ctrl Shift <Key>C: copy-selection(CLIPBOARD) \n\
+    Ctrl Shift <Key>V: insert-selection(CLIPBOARD)
