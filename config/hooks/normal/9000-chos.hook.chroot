@@ -20,10 +20,14 @@ echo "[CHOS] Réglages de la session"
 rm -f /usr/share/xsessions/openbox.desktop /usr/share/xsessions/openbox-kde.desktop
 
 chmod 0755 /usr/bin/chos-session /usr/bin/chos-power /usr/bin/chos-install \
-	/usr/lib/chos/autostart /usr/lib/chos/chrome-loop /usr/lib/chos/selftest
+	/usr/lib/chos/autostart /usr/lib/chos/chrome-loop /usr/lib/chos/selftest \
+	/usr/lib/chos/dualboot-clock
 
 # Autotest de l'intégration continue (ne s'exécute qu'avec « chos.selftest »).
 systemctl enable chos-selftest.service
+
+# Double démarrage : horloge du PC à l'heure locale, comme Windows.
+systemctl enable chos-dualboot-clock.service
 
 # Mémoire compressée (zram) : utile sur les PC avec peu de RAM.
 mkdir -p /etc/systemd

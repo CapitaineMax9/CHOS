@@ -1,0 +1,10 @@
+[Unit]
+Description=CHOS : horloge à l'heure locale si Windows est installé
+After=local-fs.target dbus.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/chos/dualboot-clock
+
+[Install]
+WantedBy=multi-user.target

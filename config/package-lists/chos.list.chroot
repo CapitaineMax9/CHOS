@@ -58,6 +58,9 @@ blueman
 brightnessctl
 systemd-zram-generator
 
+# --- Heure automatique par Internet ---
+systemd-timesyncd
+
 # --- Mises à jour automatiques (sécurité + Chrome) ---
 unattended-upgrades
 

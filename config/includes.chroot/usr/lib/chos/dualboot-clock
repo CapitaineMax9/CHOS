@@ -1,0 +1,15 @@
+#!/bin/sh
+# Double démarrage avec Windows : Windows règle l'horloge interne du PC
+# sur l'heure locale, alors que Linux la règle par défaut en heure UTC.
+# Résultat : l'heure est décalée d'1 ou 2 heures dans l'un des deux
+# systèmes. Si Windows est présent, CHOS utilise donc aussi l'heure locale.
+
+# Rien à faire sur la clé USB.
+[ -d /run/live ] && exit 0
+
+if [ -d /boot/efi/EFI/Microsoft ] || [ -d /boot/efi/EFI/microsoft ]; then
+	if ! grep -qx LOCAL /etc/adjtime 2>/dev/null; then
+		timedatectl set-local-rtc 1
+	fi
+fi
+exit 0
