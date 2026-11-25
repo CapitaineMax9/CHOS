@@ -205,6 +205,7 @@ Raccourcis propres à CHOS (choisis pour ressembler à Windows) :
 | Ctrl+Alt+Suppr | Menu Éteindre / Redémarrer / Veille |
 | Ctrl+Alt+T | Terminal (utilisateurs avancés) — Ctrl+Maj+C / Ctrl+Maj+V pour copier / coller |
 | Touches volume / luminosité du portable | Fonctionnent normalement |
+| F9 / F10 | Baisser / augmenter la luminosité |
 
 Autres astuces :
 - **Fermer le capot** met le PC en veille.

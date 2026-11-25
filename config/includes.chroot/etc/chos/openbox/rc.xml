@@ -88,6 +88,9 @@
     <!-- Touches multimédia du PC portable : luminosité -->
     <keybind key="XF86MonBrightnessUp"><action name="Execute"><command>brightnessctl set 10%+</command></action></keybind>
     <keybind key="XF86MonBrightnessDown"><action name="Execute"><command>brightnessctl set 10%-</command></action></keybind>
+    <!-- F9 / F10 seules : luminosité (sur certains HP, Fn+F9 / Fn+F10 n'envoient pas les touches de luminosité) -->
+    <keybind key="F9"><action name="Execute"><command>brightnessctl set 10%-</command></action></keybind>
+    <keybind key="F10"><action name="Execute"><command>brightnessctl set 10%+</command></action></keybind>
   </keyboard>
 
   <mouse>
